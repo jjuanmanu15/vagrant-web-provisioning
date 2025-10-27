@@ -1,22 +1,33 @@
-# Proyecto Vagrant Web + DB
+# Taller: Vagrant con Provisionamiento por Shell
 
 ## Descripción
-Proyecto de provisionamiento con Vagrant usando Shell Scripts para desplegar:
-- Servidor web (Apache + PHP)
-- Servidor de base de datos (PostgreSQL)
+Proyecto que crea dos máquinas virtuales con Vagrant:
+- **web:** servidor Apache con PHP.
+- **db:** servidor PostgreSQL con base de datos de ejemplo.
 
-## Pasos de instalación
-1. Clonar el repositorio desde el fork.
-2. Ejecutar vagrant u` para levantar las máquinas `web` y `db`.
-3. Apache y PHP se configuran automáticamente en la máquina web.
-4. PostgreSQL se instala en la máquina db mediante `provision-db.sh`.
+## Requisitos
+- VirtualBox
+- Vagrant
+- Git
 
-## Scripts utilizados
-- **provision-web.sh:** instala Apache, PHP y copia los archivos del sitio.
-- **provision-db.sh:** instala PostgreSQL, crea base de datos y usuario.
-- **info.php:** muestra los datos de la tabla `empleados` usando PDO.
+## Instrucciones
+1. Clonar el repositorio:  
+   `git clone https://github.com/jjuanmanu15/vagrant-web-provisioning.git`
+2. Levantar las máquinas:  
+   `vagrant up`
+3. Acceder al sitio web:  
+   `http://192.168.56.10/`
+4. Ver los datos de la base:  
+   `http://192.168.56.10/info.php`
 
-## Capturas de pantalla
-Agrega aquí tus imágenes del navegador mostrando:
-- Página HTML (`index.html`)
-- Tabla con datos desde `info.php`
+## Scripts de Provisionamiento
+- **provision-web.sh**: instala Apache, PHP y copia los archivos del sitio.
+- **provision-db.sh**: instala PostgreSQL, crea base de datos y tabla de ejemplo.
+- **Archivos del sitio:** `index.html` y `info.php`.
+
+## Capturas
+Incluye aquí imágenes del sitio web y del listado de empleados funcionando.
+
+## Autor
+Juan Manuel Pérez  
+
