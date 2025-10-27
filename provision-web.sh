@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Actualizar paquetes
+echo "[WEB] Actualizando índices de paquetes..."
 sudo apt-get update -y
 
-# Instalar Apache y PHP
-sudo apt-get install -y apache2 php libapache2-mod-php
+echo "[WEB] Instalando Apache y PHP..."
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y apache2 php libapache2-mod-php
 
-# Habilitar Apache al inicio
+echo "[WEB] Habilitando y arrancando Apache..."
 sudo systemctl enable apache2
-sudo systemctl start apache2
+sudo systemctl restart apache2
 
-# Copiar archivos del proyecto (carpeta compartida Vagrant)
-sudo cp -r /vagrant/www/* /var/www/html/
+echo "[WEB] Configurando contenido en /var/www/html..."
+# Limpiar el index predeterminado y agregar página de prueba
+sudo rm -f /var/www/html/index.html
+echo "<h1>Servidor web listo</h1>" | sudo tee /var/www/html/index.html > /dev/null
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php > /dev/null
 
-# Dar permisos
+echo "[WEB] Permisos de /var/www/html..."
 sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+
+echo "[WEB] Provisionamiento completado. Apache sirve desde /var/www/html."
+
